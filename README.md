@@ -41,6 +41,14 @@ root filesystem on `/mnt` without any other filesystems that are mounted on top.
 You need to decide on what environment you want. I recommend
 [Alpine Linux mini rootfs tarball](https://alpinelinux.org/), which is bare bones linux rootfs tarball and will be using in this guide.
 
+Requirements: 
+The GCC compiler,
+Wget,
+Tar,
+Gunzip,
+Free time,
+And some water.
+
 1. Create a directory `/takeover` on your target system and mount a temp filesystem to it by using this command, $`mount -t tmpfs tmpfs /takeover`
 2. Download and Extract the rootfs tarball to the /takeover directory using this command, $`wget -O - https://dl-cdn.alpinelinux.org/alpine/v3.15/releases/x86_64/alpine-minirootfs-3.15.2-x86_64.tar.gz | gunzip | tar xv` Also note you need to be in the takeover directory in order to do that
 3. Compile fakeinit.c using $`gcc --output /takeover/fakeinit ./fakeinit.c`
