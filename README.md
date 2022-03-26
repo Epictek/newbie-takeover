@@ -1,9 +1,11 @@
-# takeover.sh
+# Newbie takeover.sh
 
 A script to completely take over a running Linux system remotely, allowing you
 to log into an in-memory rescue environment, unmount the original root
 filesystem, and do anything you want, all without rebooting. Replace one distro
 with another without touching a physical console.
+
+However you can also use it in a TTY.
 
 ## WARNING WARNING WARNING WARNING
 
@@ -11,7 +13,7 @@ This is experimental. Do not use this script if you don't understand exactly
 how it works. Do not use this script on any system you care about. Do not use
 this script on any system you expect to be up. Do not run this script unless
 you can afford to get physical access to fix a botched takeover. If anything
-goes wrong, your system will most likely panic.
+goes wrong, your system will most likely panic. Unless you have balls to do that
 
 That said, this script will not (itself) make any permanent changes to your
 existing root filesystem (assuming you run it from a tmpfs), so as long as you
@@ -22,16 +24,11 @@ This script does not have any provisions for exiting *out* of the new
 environment back into something sane. You *will* have to reboot when you're
 done. If you get anything wrong, your machine won't boot. Tough luck.
 
-This is not a guide for newbies. I'm deliberately not giving you commands you
-can copy and paste. If you can't figure out what to do exactly without
-handholding, this script is not for you.
+This is (sort of) a guide for newbies. 
 
 ## Compatibility
 
-This script is designed for init systems that support the `telinit u` command to
-reload the init binary. This includes sysvinit and systemd. If your init system
-works a different way, you will have to adapt it, or this might not work at
-all. You're on your own here.
+This script is designed for init systems that support the `telinit u` command, If the command doesn't work or exist it will try the openrc method or the systemctl one
 
 You should always test this in a VM first. You can grab a tarball of your live
 root filesystem, extract it into a VM image, get your VM up and running (boot
@@ -41,13 +38,18 @@ root filesystem on `/mnt` without any other filesystems that are mounted on top.
 
 ## Usage
 
-You need to decide on what rescue environment you want. I recommend
-[SystemRescueCD](https://www.system-rescue-cd.org/), which comes with many
-useful tools (you have to loopmount the ISO and then use `unsquashfs`).
-Obviously, whatever you pick has to fit into free RAM, with room to spare. If
-your chosen rescue environment has `/lib/modules`, you may want to get rid of
-it to save space, as its kernel modules won't be useful on the host kernel
-anyway.
+You need to decide on what environment you want. I recommend
+[Alpine Linux mini rootfs tarball](https://alpinelinux.org/), which is bare bones linux rootfs tarball and will be using in this guide.
+
+1. Create a directory `/takeover` on your target system and mount a temp filesystem to it by using this command, $`mount -t tmpfs tmpfs /takeover`
+2. Download and Extract the rootfs tarball to the /takeover directory using this command, $`wget -O - https://dl-cdn.alpinelinux.org/alpine/v3.15/releases/x86_64/alpine-minirootfs-3.15.2-x86_64.tar.gz | gunzip | tar xv` Also note you need to be in the takeover directory in order to do that
+3. Compile fakeinit.c using $`gcc --output /takeover/fakeinit ./fakeinit.c`
+4. Copy the takeover.sh script to the /takeover directory
+5. Make sure to have a static copy of busybox with the name "busybox" in the takeover directory from lets say [The offical busybox web](https://busybox.net/downloads/binaries/1.31.0-defconfig-multiarch-musl/busybox-x86_64)
+6. Now run the script and be *VERY* careful using $`sh /takeover/takeover.sh` and follow the steps on screen.
+# Will continue making it better to understand
+
+## old guide
 
 1. Create a directory `/takeover` on your target system and mount a tmpfs on it
 2. Extract your rescue environment there. Make sure it works by chrooting into
