@@ -3,7 +3,7 @@ set -e
 
 TO=/takeover
 OLD_INIT=$(readlink /proc/1/exe)
-PORT=80
+PORT=2222
 
 cd "$TO"
 
@@ -14,7 +14,7 @@ fi
 
 ./busybox echo "Please set a root password for sshd"
 
-./busybox chroot . /bin/passwd
+./busybox chroot . /bin/passwd || ./busybox echo "Trying /usr/bin/passwd"; ./busybox chroot . /usr/bin/passwd
 
 ./busybox echo "Setting up target filesystem..."
 ./busybox rm -f etc/mtab
@@ -67,14 +67,7 @@ EOF
 ./busybox chroot . /usr/bin/ssh-keygen -A
 ./busybox chroot . /usr/sbin/sshd -p $PORT -o PermitRootLogin=yes
 
-./busybox echo "You should SSH into the secondary sshd now."
-./busybox echo "Type OK to continue"
-./busybox echo -n "> "
-read a
-if [ "$a" != "OK" ] ; then
-    exit 1
-fi
-
+./busybox echo "You should SSH into the secondary sshd now or wait if your using a TTY and not a SSH shell."
 ./busybox echo "About to take over init. This script will now pause for a few seconds."
 ./busybox echo "If the takeover was successful, you will see output from the new init."
 ./busybox echo "You may then kill the remnants of this session and any remaining"
@@ -83,6 +76,11 @@ fi
 ./busybox mount --bind tmp/${OLD_INIT##*/} ${OLD_INIT}
 
 telinit u
+
+./busybox echo "Changing PATH"
+# Since export is a standard SH command (built into the shell) We don't need to call it from busybox (it doesn't have the export applet anyway..)
+export PATH="/bin:/sbin:/usr/bin:/usr/sbin"
+./busybox echo "Done, you may now clean up the old init's mess. (killing logind and network manager is safe)"
 
 ./busybox sleep 10
 
