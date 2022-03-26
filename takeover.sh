@@ -12,7 +12,15 @@ if [ ! -e fakeinit ]; then
     exit 1
 fi
 
-./busybox echo "Please set a root password for sshd"
+./busybox echo "WARNING: THIS WILL TAKEOVER THE SYSTEM, ARE YOU SURE? THEN TYPE OK IN ALL CAPS"
+./busybox echo -n "> "
+read a
+if [ "$a" != "OK" ] ; then
+    exit 1
+fi
+
+./busybox echo "Please set the root password"
+./busybox echo "Also don't forget to install ssh server on the takeover rootfs if your using a VPS or a headless device (like a server)" 
 
 ./busybox chroot . /bin/passwd || ./busybox echo "Trying /usr/bin/passwd"; ./busybox chroot . /usr/bin/passwd
 
@@ -39,13 +47,6 @@ TTY="$(./busybox tty)"
 
 exec <"$TO/$TTY" >"$TO/$TTY" 2>"$TO/$TTY"
 
-./busybox echo "Type 'OK' to continue"
-./busybox echo -n "> "
-read a
-if [ "$a" != "OK" ] ; then
-    exit 1
-fi
-
 ./busybox echo "Preparing init..."
 ./busybox cat >tmp/${OLD_INIT##*/} <<EOF
 #!${TO}/busybox sh
@@ -62,25 +63,25 @@ exec ./busybox chroot . /fakeinit
 EOF
 ./busybox chmod +x tmp/${OLD_INIT##*/}
 
-./busybox echo "Starting secondary sshd"
+./busybox echo "Starting secondary sshd (or maybe not)"
 
-./busybox chroot . /usr/bin/ssh-keygen -A
-./busybox chroot . /usr/sbin/sshd -p $PORT -o PermitRootLogin=yes
+./busybox chroot . /usr/bin/ssh-keygen -A || echo "Not starting SSH"
+./busybox chroot . /usr/sbin/sshd -p $PORT -o PermitRootLogin=yes || true
 
 ./busybox echo "You should SSH into the secondary sshd now or wait if your using a TTY and not a SSH shell."
 ./busybox echo "About to take over init. This script will now pause for a few seconds."
 ./busybox echo "If the takeover was successful, you will see output from the new init."
 ./busybox echo "You may then kill the remnants of this session and any remaining"
-./busybox echo "processes from your new SSH session, and umount the old root filesystem."
+./busybox echo "processes (includes ones from the old init) from your new SSH session, and umount the old root filesystem."
 
 ./busybox mount --bind tmp/${OLD_INIT##*/} ${OLD_INIT}
 
-telinit u
+telinit u || systemctl daemon-reexec || openrc-shutdown --reexec
 
 ./busybox echo "Changing PATH"
 # Since export is a standard SH command (built into the shell) We don't need to call it from busybox (it doesn't have the export applet anyway..)
+# Also there's a benefit since it will let us seamlessly use the shell
 export PATH="/bin:/sbin:/usr/bin:/usr/sbin"
-./busybox echo "Done, you may now clean up the old init's mess. (killing logind and network manager is safe)"
 
 ./busybox sleep 10
 
