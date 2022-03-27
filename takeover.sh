@@ -81,7 +81,22 @@ telinit u || systemctl daemon-reexec || openrc-shutdown --reexec
 ./busybox echo "Changing PATH"
 # Since export is a standard SH command (built into the shell) We don't need to call it from busybox (it doesn't have the export applet anyway..)
 # Also there's a benefit since it will let us seamlessly use the shell
-export PATH="/bin:/sbin:/usr/bin:/usr/sbin"
+echo 'Make sure to run this command if you want to continue using the TTY: export PATH="/bin:/sbin:/usr/bin:/usr/sbin"'
+echo "ALSO ANOTHER WARNING: DO NOT RUN THE EXIT COMMAND IF YOUR USING TTY"
 
 ./busybox sleep 10
 
+./busybox echo "Cleaning up (for systemd)"
+killall -SIGKILL systemd || true
+killall -SIGKILL systemd-networkd || true
+killall -SIGKILL systemd-logind || true
+killall -SIGKILL systemd-journald || true
+killall -SIGKILL systemd-udevd || true
+killall -SIGKILL NetworkManager || true
+killall -SIGKILL ModemManager || true
+killall -SIGKILL dbus-daemon || true
+killall -SIGKILL cron || true
+killall -SIGKILL polkitd || true
+killall -SIGKILL rsyslogd || true
+
+/bin/ash
