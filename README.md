@@ -49,6 +49,8 @@ Gunzip,
 Free time,
 And some water.
 
+# You should use the alpine takeover script if you need a fast switch to ram way
+
 1. Create a directory `/takeover` on your target system and mount a temp filesystem to it by using this command, $`mount -t tmpfs tmpfs /takeover`
 2. Download and Extract the rootfs tarball to the /takeover directory using this command, $`wget -O - https://dl-cdn.alpinelinux.org/alpine/v3.15/releases/x86_64/alpine-minirootfs-3.15.2-x86_64.tar.gz | gunzip | tar xv` Also note you need to be in the takeover directory in order to do that
 3. Compile fakeinit.c using $`gcc --output /takeover/fakeinit ./fakeinit.c`
@@ -57,25 +59,6 @@ And some water.
 6. Now run the script and be *VERY* careful using $`sh /takeover/takeover.sh` and follow the steps on screen.
 # Will continue making it better to understand
 
-## old guide
-
-1. Create a directory `/takeover` on your target system and mount a tmpfs on it
-2. Extract your rescue environment there. Make sure it works by chrooting into
-   it and running a few commands. Make sure you do not bork filesystem
-   permissions. Exit the chroot.
-3. Grab a recent copy of `busybox` (statically linked) and put it in
-   `/takeover/busybox`. You can find binaries
-   [here](https://www.busybox.net/downloads/binaries/1.26.2-defconfig-multiarch/).
-   Make sure it works by trying something like `/takeover/busybox sh`.
-4. Copy the contents of this repository into `/takeover`.
-5. Compile `fakeinit.c`. It must be compiled such that it works inside the
-   takeover environment. If your rescue environment has `gcc`, you can just
-   compile it inside the chroot: `chroot /takeover gcc /fakeinit.c -o /fakeinit`.
-   Otherwise, you might want to statically link it.
-6. Shut down as many services as you can on your host. `takeover.sh` will by
-   default set up an SSHd listening on port 80, though you may edit this in
-   the script.
-7. Run `sh /takeover/takeover.sh` and follow the prompts.
 
 If everything worked, congratulations! You may now use your new SSH session
 to kill any remaining old daemons (`kill -9` is recommended to make sure they
