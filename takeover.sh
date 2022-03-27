@@ -78,11 +78,12 @@ EOF
 
 telinit u || systemctl daemon-reexec || openrc-shutdown --reexec
 
-./busybox echo "Changing PATH"
+echo "Changing PATH for the script"
 # Since export is a standard SH command (built into the shell) We don't need to call it from busybox (it doesn't have the export applet anyway..)
 # Also there's a benefit since it will let us seamlessly use the shell
-echo 'Make sure to run this command if you want to continue using the TTY: export PATH="/bin:/sbin:/usr/bin:/usr/sbin"'
-echo "ALSO ANOTHER WARNING: DO NOT RUN THE EXIT COMMAND IF YOUR USING TTY"
+export PATH="/bin:/sbin:/usr/bin:/usr/sbin"
+./busybox echo 'Make sure to run this command if you want to continue using the TTY: export PATH="/bin:/sbin:/usr/bin:/usr/sbin"'
+./busybox echo "ALSO ANOTHER WARNING: DO NOT RUN THE EXIT COMMAND IF YOUR USING TTY"
 
 ./busybox sleep 10
 
