@@ -76,7 +76,7 @@ EOF
 
 ./busybox mount --bind tmp/${OLD_INIT##*/} ${OLD_INIT}
 
-telinit u || systemctl daemon-reexec || openrc-shutdown --reexec
+telinit u || systemctl daemon-reexec || openrc-shutdown --reexec || echo 'Not taking over the init'; true
 
 echo "Changing PATH for the script"
 # Since export is a standard SH command (built into the shell) We don't need to call it from busybox (it doesn't have the export applet anyway..)
