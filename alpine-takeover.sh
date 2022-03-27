@@ -12,10 +12,10 @@ mkdir /takeover || echo "Directory was made, no need to make it"
 echo "Mounting the file system"
 mount -t tmpfs tmpfs /takeover
 # copy files for the takeover
-copy fakeinit.c /takeover/
-copy takeover.sh /takeover/
-copy reboot /takeover/
-copy poweroff /takeover/
+cp fakeinit.c /takeover/
+cp takeover.sh /takeover/
+cp reboot /takeover/
+cp poweroff /takeover/
 echo "Extracting alpine linux mini rootfs tarball"
 cd /takeover
 wget -O - https://dl-cdn.alpinelinux.org/alpine/v3.15/releases/x86_64/alpine-minirootfs-$ALPINEVER-x86_64.tar.gz | gunzip | tar xv -C /takeover/
@@ -27,9 +27,10 @@ cp /etc/resolv.conf /takeover/etc/
 # compile, then delete alpine sdk
 chroot . /sbin/apk update
 chroot . /sbin/apk upgrade
-chroot . /sbin/apk add openssh-server alpine-sdk htop neofetch alpine-conf shadow
-chroot . /bin/gcc /fakeinit.c -o /fakeinit
+chroot . /sbin/apk add openssh-server alpine-sdk htop neofetch alpine-conf shadow busybox-static
+chroot . /usr/bin/gcc /fakeinit.c -o /fakeinit
 chroot . /sbin/apk del alpine-sdk
 echo PermitRootLogin yes >> /takeover/etc/ssh/sshd_config
+cp /takeover/bin/busybox.static /takeover/busybox
 echo "Off we go!"
 sh ./takeover.sh
