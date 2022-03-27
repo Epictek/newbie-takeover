@@ -18,7 +18,7 @@ cp reboot /takeover/
 cp poweroff /takeover/
 echo "Extracting alpine linux mini rootfs tarball"
 cd /takeover
-wget -O - https://dl-cdn.alpinelinux.org/alpine/v3.15/releases/x86_64/alpine-minirootfs-$ALPINEVER-x86_64.tar.gz | gunzip | tar xv -C /takeover/
+wget -O - https://dl-cdn.alpinelinux.org/alpine/latest-stable/releases/x86_64/alpine-minirootfs-$ALPINEVER-x86_64.tar.gz | gunzip | tar xv -C /takeover/
 echo "Preparing"
 # copy needed files to have internet in chroot 
 cp /etc/hosts /takeover/etc/
