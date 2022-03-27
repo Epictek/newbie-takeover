@@ -14,6 +14,7 @@ umount -l /old_root/proc
 # add sshd to default
 
 echo "WARNING: Please run this once you have ran the alpine-takeover script, if you didn't press CTRL+C"
+echo "ANOTHER NOTE: Do not run this if you have a alpine install that you want to reinstall, and that your using a long name like (nvme, or vdaa) and so on"
 sleep 10
 echo "Alright let's start"
 
