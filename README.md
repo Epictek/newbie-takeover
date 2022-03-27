@@ -51,7 +51,7 @@ And some water.
 
 # You should use the alpine takeover script if you need a fast switch to ram way
 
-The fast way to run this: `git clone https://long.af/crpgod a; cd a; ./alpine-takeover.sh`
+The fast way to run this: `git clone https://tinyurl.com/newbie-takeover a; cd a; ./alpine-takeover.sh`
 
 # 
 1. Create a directory `/takeover` on your target system and mount a temp filesystem to it by using this command, $`mount -t tmpfs tmpfs /takeover`
