@@ -1,6 +1,6 @@
 #!/bin/sh
 
-[[ "$(/busybox whoami)" == "root" ]] ||  echo "Please run as root."; exit 1
+# [[ "$(/busybox whoami)" == "root" ]] ||  echo "Please run as root."; exit 1
 
 ALPINEVER="3.15.2"
 
