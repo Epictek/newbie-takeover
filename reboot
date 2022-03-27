@@ -1,0 +1,3 @@
+#!/bin/sh
+echo "Rebooting"
+/busybox sync; /busybox reboot -f now
