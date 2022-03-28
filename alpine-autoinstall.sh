@@ -3,6 +3,7 @@
 umount -l /old_root/dev
 umount -l /old_root/sys
 umount -l /old_root/proc
+umount -f -l -R /old_root/*
 
 # NOTES:
 # add hostname to sysinit
