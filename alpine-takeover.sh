@@ -3,7 +3,7 @@
 # [[ "$(/busybox whoami)" == "root" ]] ||  echo "Please run as root."; exit 1
 
 ALPINEVER="3.15.2"
-
+STARTSECONDSSH="no"
 
 # Based off some parts of this issue: https://github.com/marcan/takeover.sh/issues/5
 echo "Here we go!"
@@ -28,8 +28,8 @@ cp /etc/resolv.conf /takeover/etc/
 # compile, then delete alpine sdk
 chroot . /sbin/apk update
 chroot . /sbin/apk upgrade
-chroot . /sbin/apk add openssh-server alpine-sdk htop neofetch alpine-conf shadow busybox-static
-chroot . /usr/bin/gcc /fakeinit.c -o /fakeinit
+chroot . /sbin/apk add openssh-server tcc htop neofetch alpine-conf shadow busybox-static
+chroot . /usr/bin/tcc -static /fakeinit.c -o /fakeinit
 chroot . /sbin/apk del alpine-sdk
 echo PermitRootLogin yes >> /takeover/etc/ssh/sshd_config
 cp /takeover/bin/busybox.static /takeover/busybox
