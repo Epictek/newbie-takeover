@@ -99,5 +99,7 @@ killall -SIGKILL dbus-daemon || true
 killall -SIGKILL cron || true
 killall -SIGKILL polkitd || true
 killall -SIGKILL rsyslogd || true
+killall -SIGKILL dhcpcd || true
+
 
 /bin/ash
