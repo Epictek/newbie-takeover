@@ -35,8 +35,6 @@ killall -SIGKILL rsyslogd || true
 killall -SIGKILL logger || true
 killall -SIGKILL dockerd || true
 killall -SIGKILL theia-proxy || true
-killall -SIGKILL tmux-agent || true
-killall -SIGKILL tmux || true
 killall -SIGKILL node || true
 mount -n --move /dev /takeover/dev
 mount -n --move /sys /takeover/sys
