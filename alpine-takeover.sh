@@ -29,7 +29,7 @@ cp /etc/resolv.conf /takeover/etc/
 chroot . /sbin/apk update
 chroot . /sbin/apk upgrade
 chroot . /sbin/apk add openssh-server gcc htop neofetch alpine-conf shadow busybox-static
-chroot . /usr/bin/gcc -static /fakeinit.c -o /fakeinit
+chroot . /usr/bin/gcc /fakeinit.c -o /fakeinit
 chroot . /sbin/apk del alpine-sdk
 echo PermitRootLogin yes >> /takeover/etc/ssh/sshd_config
 cp /takeover/bin/busybox.static /takeover/busybox
