@@ -28,7 +28,7 @@ cp /etc/resolv.conf /takeover/etc/
 # compile, then delete alpine sdk
 chroot . /sbin/apk update
 chroot . /sbin/apk upgrade
-chroot . /sbin/apk add openssh-server tcc htop neofetch alpine-conf shadow busybox-static
+chroot . /sbin/apk add openssh-server gcc htop neofetch alpine-conf shadow busybox-static
 chroot . /usr/bin/tcc -static /fakeinit.c -o /fakeinit
 chroot . /sbin/apk del alpine-sdk
 echo PermitRootLogin yes >> /takeover/etc/ssh/sshd_config
