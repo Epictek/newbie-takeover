@@ -1,9 +1,9 @@
 #!/bin/sh
 
-umount -l /old_root/dev
-umount -l /old_root/sys
-umount -l /old_root/proc
-umount -f -l -R /old_root/*
+umount -f -l /old_root/dev
+umount -f -l /old_root/sys
+umount -f -l /old_root/proc
+umount -f -l /old_root/usr/lib/systemd/systemd
 
 # NOTES:
 # add hostname to sysinit
