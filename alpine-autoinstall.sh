@@ -31,7 +31,7 @@ mount -t proc proc /old_root/proc
 mount -t devtmpfs dev /old_root/dev
 mount -t sysfs sys /old_root/sys
 chroot /old_root /sbin/apk fix
-echo -e "auto lo\niface lo inet loopback\n\nauto eth0\niface eth0 inet dhcp" > /etc/network/interfaces
+echo -e "auto lo\niface lo inet loopback\n\nauto eth0\niface eth0 inet dhcp" > /old_root/etc/network/interfaces
 chroot /old_root /sbin/rc-update add hostname sysinit
 chroot /old_root /sbin/rc-update add localmount sysinit
 chroot /old_root /sbin/rc-update add modules sysinit
