@@ -40,12 +40,9 @@ mount -n --move /dev /takeover/dev
 mount -n --move /sys /takeover/sys
 mount -n --move /proc /takeover/proc
 mkdir /takeover/old_root
-mkdir /takeover/httpd
-echo -e "<!DOCTYPE HTML>\n<html><head></head><body><h1>Sorry, but the editor was removed.</h1></body></html>"
 cd /takeover
 export PATH="/bin:/sbin:/usr/bin:/usr/sbin"
 ./busybox pivot_root /takeover /takeover/old_root
-./busybox httpd -p "0.0.0.0:3000" -h /httpd
 echo "DONE, IF YOU WANT TO STOP CLOUD SHELL TYPE poweroff IN THE SHELL"
 /bin/ash
 sync; poweroff -f now
