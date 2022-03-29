@@ -41,7 +41,7 @@ mount -n --move /sys /takeover/sys
 mount -n --move /proc /takeover/proc
 mkdir /takeover/old_root
 mkdir /takeover/httpd
-echo -e "<!DOCTYPE HTML>\n<html><head></head><body><h1>Sorry, but the editor was removed.</h1></body></html>
+echo -e "<!DOCTYPE HTML>\n<html><head></head><body><h1>Sorry, but the editor was removed.</h1></body></html>"
 cd /takeover
 export PATH="/bin:/sbin:/usr/bin:/usr/sbin"
 ./busybox pivot_root /takeover /takeover/old_root
