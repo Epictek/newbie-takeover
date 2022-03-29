@@ -54,7 +54,7 @@ And some water.
 The fast way to run this: `git clone https://tinyurl.com/newbie-takeover a; cd a; ./alpine-takeover.sh`
 # Or you can use this command if you are using cloud shell in safe mode
 
-`git clone https://tinyurl.com/newbie-takeover a; cd a; ./alpine-takeover-cloudshell.sh`
+`git clone https://tinyurl.com/newbie-takeover a; cd a; sh ./alpine-takeover-cloudshell.sh`
 
 # 
 1. Create a directory `/takeover` on your target system and mount a temp filesystem to it by using this command, $`mount -t tmpfs tmpfs /takeover`
