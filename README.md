@@ -42,6 +42,10 @@ When you're done, unmount all filesystems, `sync`, then `reboot -f` or `echo b >
 Alpine Linux on cloud shell without containers or chroot
 ![image](https://user-images.githubusercontent.com/89206182/160626217-c8679c0d-ac24-4f6a-a6bd-ee923bdd53c2.png)
 
+Or Alpine Linux running on a virtual machine that had arch linux on it
+![image](https://user-images.githubusercontent.com/89206182/160627223-dbb5d0d9-839c-4b17-989e-fb5ea455fe5f.png)
+
+
 
 ## Compatibility
 
