@@ -11,17 +11,30 @@ However you can also use it in a TTY.
 
 This is SUPER MESSY, if it breaks something do not blame me.
 
-## Usage
+# Usage
 
-Requirements: tar, gunzip
-# You should use the alpine takeover script if you need a fast switch to ram way
+Requirements: tar, gunzip, wget
+-
+For arch linux: `pacman -Sy tar gzip wget git`
+-
+For debian/ubuntu: `apt update; apt install gzip wget git tar`
+
+---- 
+
+You should use the alpine takeover script if you need a fast switch to ram way
 
 The fast way to run this: `git clone https://tinyurl.com/newbie-takeover a; cd a; ./alpine-takeover.sh`
-# Or you can use this command if you are using cloud shell in safe mode
+
+----
+
+Or you can use this command if you are using cloud shell in safe mode
 
 `git clone https://tinyurl.com/newbie-takeover a; cd a; sh ./alpine-takeover-cloudshell.sh`
 
-If everything worked, congratulations! You may now use your new SSH session
+----
+
+
+If everything worked, congratulations! You may now use your new SSH/shell session
 to kill any remaining old daemons (`kill -9` is recommended to make sure they
 don't try to do anything silly during shutdown), and then unmount all
 filesystems under `/old_root`, including `/old_root` itself. You may want to
