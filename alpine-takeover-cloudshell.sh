@@ -43,6 +43,6 @@ mkdir /takeover/old_root
 cd /takeover
 export PATH="/bin:/sbin:/usr/bin:/usr/sbin"
 ./busybox pivot_root /takeover /takeover/old_root
-echo "DONE, IF YOU WANT TO STOP CLOUD SHELL TYPE poweroff IN THE SHELL"
+echo "DONE, IF YOU WANT TO STOP CLOUD SHELL TYPE 'exit' IN THE SHELL"
 /bin/ash
 sync; poweroff -f now
