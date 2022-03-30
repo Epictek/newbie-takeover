@@ -60,6 +60,7 @@ Or Alpine Linux running on a virtual machine that had arch linux on it
 
 ## TO DO:
 [] Try on docker containers (and make a script for it)
+-
 [] Try on android (and make a script for it)
 
 
