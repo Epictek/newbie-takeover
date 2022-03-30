@@ -58,6 +58,10 @@ Alpine Linux on cloud shell without containers or chroot
 Or Alpine Linux running on a virtual machine that had arch linux on it
 ![image](https://user-images.githubusercontent.com/89206182/160627223-dbb5d0d9-839c-4b17-989e-fb5ea455fe5f.png)
 
+## TO DO:
+[] Try on docker containers (and make a script for it)
+[] Try on android (and make a script for it)
+
 
 
 ## Compatibility
