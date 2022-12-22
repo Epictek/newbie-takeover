@@ -2,9 +2,9 @@
 
 # [[ "$(/busybox whoami)" == "root" ]] ||  echo "Please run as root."; exit 1
 
-ALPINEVER="3.15.3"
+ALPINEVER="3.17.0"
 ARCHVER="armv7"
-STARTSECONarmv7DSSH="no"
+STARTSECONDSSH="no"
 
 # Based off some parts of this issue: https://github.com/marcan/takeover.sh/issues/5
 echo "Here we go!"
