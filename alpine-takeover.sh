@@ -3,7 +3,8 @@
 # [[ "$(/busybox whoami)" == "root" ]] ||  echo "Please run as root."; exit 1
 
 ALPINEVER="3.15.3"
-STARTSECONDSSH="no"
+ARCHVER="armv7"
+STARTSECONarmv7DSSH="no"
 
 # Based off some parts of this issue: https://github.com/marcan/takeover.sh/issues/5
 echo "Here we go!"
@@ -16,7 +17,7 @@ cp fakeinit.c /takeover/
 cp takeover.sh /takeover/
 cp alpine-autoinstall.sh /takeover/
 echo "Extracting alpine linux mini rootfs tarball"
-wget -O - https://dl-cdn.alpinelinux.org/alpine/latest-stable/releases/x86_64/alpine-minirootfs-$ALPINEVER-x86_64.tar.gz | gunzip | tar xv -C /takeover/
+wget -O - https://dl-cdn.alpinelinux.org/alpine/latest-stable/releases/$ARCHVER/alpine-minirootfs-$ALPINEVER-$ARCHVER.tar.gz | gunzip | tar xv -C /takeover/
 cp ./reboot /takeover/bin/
 cp ./poweroff /takeover/bin/
 cd /takeover
